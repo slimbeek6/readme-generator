@@ -64,15 +64,19 @@ function writeToFile() {
             },
         ])
         .then((response) => {
-            fileName = response.projName;
-            data = response.name;
-            githubURL = response.githubURL;
-            projDesc = response.projDesc;
-            installInst = response.installInst;
-            projUsage = response.projUsage;
-            contrGuide = response.contrGuide;
-            testInst = response.testInst;
+            var fileName = `ReadMe--${response.projName.toLowerCase().split(' ').join('')}.txt`;
+            const data = response.name;
+            const githubURL = response.githubURL;
+            const projDesc = response.projDesc;
+            const installInst = response.installInst;
+            const projUsage = response.projUsage;
+            const contrGuide = response.contrGuide;
+            const testInst = response.testInst;
             console.log(fileName, data);
+            fs.appendFile(fileName, data, function (err) {
+                if (err) throw err;
+                console.log(data);
+            });
     });
 }
 
