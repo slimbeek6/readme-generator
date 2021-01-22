@@ -12,8 +12,19 @@ const questions = [
     {question: "What are the use cases?"},
     {question: "What licenses are needed?"},
     {question: "What are the contribution guidelines?"},
-    {question: "What are the test instructions?"}
+    {question: "What are the test instructions?"},
+    {question: "What is your email?"}
 ];
+
+// List of licenses
+const licenseOpts = ["MIT", "Mozilla", "Perl"];
+
+const licenseObjs = [
+    {name: "MIT", badge: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)", link: "[License: MIT](https://opensource.org/licenses/MIT)" },
+    {name: "Mozilla", badge: "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)", link: "[License: Mozilla](https://opensource.org/licenses/MPL-2.0)" },
+    {name: "Perl", badge: "[![License: Artistic-2.0](https://img.shields.io/badge/License-Perl-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)", link: "[License: Perl](https://opensource.org/licenses/Artistic-2.0)" }
+];
+
 
 // TODO: Create a function to write README file
 
@@ -54,9 +65,10 @@ function writeToFile() {
                 name: 'projUsage',
             },
             {
-                type: 'input',
+                type: 'list',
                 message: questions[6].question,
                 name: 'projLicense',
+                choices: licenseOpts,
             },
             {
                 type: 'input',
@@ -68,29 +80,45 @@ function writeToFile() {
                 message: questions[8].question,
                 name: 'testInst',
             },
+            {
+                type: 'input',
+                message: questions[9].question,
+                name: 'email',
+            },
         ])
         .then((response) => {
 
             // take in the responses and assign them to specific sections of the readme
             const fileName = `ReadMe--${response.projName.toLowerCase().split(' ').join('')}.md`;
             const title = `# ${response.projName}`;
-            const userName = response.name;
-            const githubURL = response.githubURL;
-            const Summ = `## Description`;
-            const projDesc = `${response.projDesc}`;
-            const projQuestions = `## Questions \n Send questions to: ${userName}, or see the github repository here: https://github.com/${githubURL}`;
+            const Summ = `## Description`;            
             const installInst = `## Installation \n ${response.installInst}`;
             const projUsage = `## Usage \n ${response.projUsage}`;
             const contrGuide = `## Contributing \n To contribute to this project: ${response.contrGuide}`;
             const projTests = `## Tests \n When running this file ensure the function is running properly by: ${response.testInst}`;
-            const projLicense = `## Licenses \n This was built using code developed by: ${response.projLicense}`;
-            console.log(title, Summ);
+            var license = "";
+            var licenseBadge = "";
+            if (response.projLicense === "MIT"){
+                license = licenseObjs[0].link;
+                licenseBadge = licenseObjs[0].badge;
+            }
+            else if (response.projLicense === "Mozilla"){
+                license = licenseObjs[1].link;
+                licenseBadge = licenseObjs[1].badge;
+            }
+            else if (response.projLicense === "Perl"){
+                license = licenseObjs[2].link;
+                licenseBadge = licenseObjs[2].badge;
+            }
+            const projQuestions = `## Questions \n Send questions to ${response.name} at ${response.email}, or see the github repository here: https://github.com/${response.githubURL}`;
+            const projLicense = `## Licenses \n This was built using code developed by: ${license}`;
+            
 
             // Create Table of Contents
             const TOC = "* [Description](#description) \n * [Installation](#installation) \n * [Project Usage](#usage) \n * [Licenses](#licenses) \n * [Tests](#tests) \n * [Contributing](#Contributing) \n * [Questions](#questions)";
 
             // Create total response
-            const output = title + "\n" + Summ + "\n" + projDesc + "### Table of Contents \n <!--ts--> \n"+TOC+"\n <!--te-->"  + "\n" + installInst + "\n" + projUsage + "\n" + projLicense + "\n" + contrGuide + "\n" + projTests + "\n" + projQuestions;
+            const output = title + `\n` + `\n ${licenseBadge}`+ `\n` + Summ + `\n ${response.projDesc}` + "\n ### Table of Contents"+ "\n <!--ts--> \n"+TOC+"\n <!--te-->"  + "\n" + installInst + "\n" + projUsage + "\n" + projLicense + "\n" + contrGuide + "\n" + projTests + "\n" + projQuestions;
 
             
             // Create Title
