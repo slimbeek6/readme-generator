@@ -64,18 +64,31 @@ function writeToFile() {
             },
         ])
         .then((response) => {
-            var fileName = `ReadMe--${response.projName.toLowerCase().split(' ').join('')}.txt`;
-            const data = response.name;
+
+            // take in the responses and assign them to specific sections of the readme
+            const fileName = `ReadMe--${response.projName.toLowerCase().split(' ').join('')}.md`;
+            const title = `# ${response.projName}`;
+            const userName = response.name;
             const githubURL = response.githubURL;
-            const projDesc = response.projDesc;
-            const installInst = response.installInst;
-            const projUsage = response.projUsage;
+            const Summ = `## Summary`;
+            const projDesc = `${response.projDesc}`;
+            const dividerLine = `<hr>`
+            const installInst = `## Installation \n ${response.installInst}`;
+            const projUsage = `## Usage \n ${response.projUsage}`;
             const contrGuide = response.contrGuide;
             const testInst = response.testInst;
-            console.log(fileName, data);
-            fs.appendFile(fileName, data, function (err) {
+            console.log(title, Summ);
+
+            // Create Table of Contents
+            const TOC = "* [Summary](#summary) \n * [Installation](#installation) \n * [Project Usage](#usage)";
+
+            // Create total response
+            const output = title + "\n" + "### Table of Contents \n <!--ts--> \n"+TOC+"\n <!--te-->" + "\n" + Summ + "\n" + projDesc + "\n" + installInst + "\n" + projUsage;
+
+            
+            // Create Title
+            fs.writeFile(fileName, output, function (err) {
                 if (err) throw err;
-                console.log(data);
             });
     });
 }
