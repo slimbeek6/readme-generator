@@ -20,9 +20,9 @@ const questions = [
 const licenseOpts = ["MIT", "Mozilla", "Perl"];
 
 const licenseObjs = [
-    {name: "MIT", badge: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)", link: "[License: MIT](https://opensource.org/licenses/MIT)" },
-    {name: "Mozilla", badge: "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)", link: "[License: Mozilla](https://opensource.org/licenses/MPL-2.0)" },
-    {name: "Perl", badge: "[![License: Artistic-2.0](https://img.shields.io/badge/License-Perl-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)", link: "[License: Perl](https://opensource.org/licenses/Artistic-2.0)" }
+    {name: "MIT", badge: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)", link: "[MIT](https://opensource.org/licenses/MIT)" },
+    {name: "Mozilla", badge: "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)", link: "[Mozilla](https://opensource.org/licenses/MPL-2.0)" },
+    {name: "Perl", badge: "[![License: Artistic-2.0](https://img.shields.io/badge/License-Perl-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)", link: "[Perl](https://opensource.org/licenses/Artistic-2.0)" }
 ];
 
 
@@ -118,7 +118,7 @@ function writeToFile() {
             const TOC = "* [Description](#description) \n * [Installation](#installation) \n * [Project Usage](#usage) \n * [Licenses](#licenses) \n * [Tests](#tests) \n * [Contributing](#Contributing) \n * [Questions](#questions)";
 
             // Create total response
-            const output = title + `\n` + `\n ${licenseBadge}`+ `\n` + Summ + `\n ${response.projDesc}` + "\n ### Table of Contents"+ "\n <!--ts--> \n"+TOC+"\n <!--te-->"  + "\n" + installInst + "\n" + projUsage + "\n" + projLicense + "\n" + contrGuide + "\n" + projTests + "\n" + projQuestions;
+            const output = title + `\n` + `\n ${licenseBadge}`+ `\n` + Summ + `\n ${response.projDesc}` + "\n ## Table of Contents"+ "\n <!--ts--> \n"+TOC+"\n <!--te--> <hr>"  + "\n" + installInst + "<hr> \n" + projUsage + "<hr> \n" + projLicense + "<hr> \n" + contrGuide + "<hr> \n" + projTests + "<hr> \n" + projQuestions;
 
             
             // Create Title
