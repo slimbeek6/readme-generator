@@ -10,6 +10,7 @@ const questions = [
     {question: "What is a short description of the project?"},
     {question: "What are the installation steps?"},
     {question: "What are the use cases?"},
+    {question: "What licenses are needed?"},
     {question: "What are the contribution guidelines?"},
     {question: "What are the test instructions?"}
 ];
@@ -55,11 +56,16 @@ function writeToFile() {
             {
                 type: 'input',
                 message: questions[6].question,
-                name: 'contrGuide',
+                name: 'projLicense',
             },
             {
                 type: 'input',
                 message: questions[7].question,
+                name: 'contrGuide',
+            },
+            {
+                type: 'input',
+                message: questions[8].question,
                 name: 'testInst',
             },
         ])
@@ -70,20 +76,21 @@ function writeToFile() {
             const title = `# ${response.projName}`;
             const userName = response.name;
             const githubURL = response.githubURL;
-            const Summ = `## Summary`;
+            const Summ = `## Description`;
             const projDesc = `${response.projDesc}`;
-            const dividerLine = `<hr>`
+            const projQuestions = `## Questions \n Send questions to: ${userName}, or see the github repository here: https://github.com/${githubURL}`;
             const installInst = `## Installation \n ${response.installInst}`;
             const projUsage = `## Usage \n ${response.projUsage}`;
-            const contrGuide = response.contrGuide;
-            const testInst = response.testInst;
+            const contrGuide = `## Contributing \n To contribute to this project: ${response.contrGuide}`;
+            const projTests = `## Tests \n When running this file ensure the function is running properly by: ${response.testInst}`;
+            const projLicense = `## Licenses \n This was built using code developed by: ${response.projLicense}`;
             console.log(title, Summ);
 
             // Create Table of Contents
-            const TOC = "* [Summary](#summary) \n * [Installation](#installation) \n * [Project Usage](#usage)";
+            const TOC = "* [Description](#description) \n * [Installation](#installation) \n * [Project Usage](#usage) \n * [Licenses](#licenses) \n * [Tests](#tests) \n * [Contributing](#Contributing) \n * [Questions](#questions)";
 
             // Create total response
-            const output = title + "\n" + "### Table of Contents \n <!--ts--> \n"+TOC+"\n <!--te-->" + "\n" + Summ + "\n" + projDesc + "\n" + installInst + "\n" + projUsage;
+            const output = title + "\n" + Summ + "\n" + projDesc + "### Table of Contents \n <!--ts--> \n"+TOC+"\n <!--te-->"  + "\n" + installInst + "\n" + projUsage + "\n" + projLicense + "\n" + contrGuide + "\n" + projTests + "\n" + projQuestions;
 
             
             // Create Title

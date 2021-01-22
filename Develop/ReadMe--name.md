@@ -1,13 +1,19 @@
 # name
-### Table of Contents 
+## Description
+description### Table of Contents 
  <!--ts--> 
-* [Summary](#summary) 
+* [Description](#description) 
  * [Installation](#installation) 
- * [Project Usage](#usage)
+ * [Project Usage](#usage) 
+ * [Licenses](#licenses) 
+ * [Tests](#tests) 
+ * [Questions](#questions)
  <!--te-->
-## Summary
-summary
 ## Installation 
- install
+ install steps
 ## Usage 
- usage
+ use cases
+licenses
+contribution
+testing
+Send questions to: Shaun, or see the github repository here: https://github.com/slimbeek6/readme-generator
